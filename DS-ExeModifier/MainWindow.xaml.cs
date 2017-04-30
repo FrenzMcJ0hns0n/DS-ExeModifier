@@ -34,7 +34,9 @@ namespace DS_ExeModifier {
 
         public void EditExe(int dvdbnd, byte[] unicodeExpression) {
             switch (exeType) {
-                case "release":
+
+                // RELEASE
+                case "T6":
                     if (dvdbnd == 0) {
                         fsWriter.Position = 0xD65EA4; // = 14048932
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
@@ -51,7 +53,7 @@ namespace DS_ExeModifier {
                         fsWriter.Position = 0xD66C90; // = 14052496
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                     }
-                    if (dvdbnd == 1) {
+                    else if (dvdbnd == 1) {
                         fsWriter.Position = 0xD57F14; // = 13991700
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                         fsWriter.Position = 0xD65DAC; // = 14048684
@@ -72,7 +74,9 @@ namespace DS_ExeModifier {
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                     }
                     break;
-                case "debug":
+
+                // DEBUG
+                case "´4":
                     if (dvdbnd == 0) {
                         fsWriter.Position = 0xD6816C; // = 14057836
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
@@ -89,7 +93,7 @@ namespace DS_ExeModifier {
                         fsWriter.Position = 0xD68F58; // = 14061400
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                     }
-                    if (dvdbnd == 1) {
+                    else if (dvdbnd == 1) {
                         fsWriter.Position = 0xD5C2D4; // = 14009044
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                         fsWriter.Position = 0xD68074; // = 14057588
@@ -112,85 +116,7 @@ namespace DS_ExeModifier {
                     break;
             }
         }
-        /*
-        public void EditDvdbnd0_release(byte[] unicodeExpression) {
 
-            fsWriter.Position = 0xD65EA4; // = 14048932
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD660F8; // = 14049528
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD66180; // = 14049664
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD6627C; // = 14049916
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD662C8; // = 14049992
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD66318; // = 14050072
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD66C90; // = 14052496
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-        }
-
-        public void EditDvdbnd1_release(byte[] unicodeExpression) {
-
-            fsWriter.Position = 0xD57F14; // = 13991700
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD65DAC; // = 14048684
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD65DF4; // = 14048756
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD65FFC; // = 14049276
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD6613C; // = 14049596
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD6636C; // = 14050156
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD66484; // = 14050436
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD665F0; // = 14050800
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD666E4; // = 14051044
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-        }
-
-        public void EditDvdbnd0_debug(byte[] unicodeExpression) {
-            fsWriter.Position = 0xD6816C; // = 14057836
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD683C0; // = 14058432
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD68448; // = 14058568
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD68544; // = 14058820
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD68590; // = 14058896
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD685E0; // = 14058976
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD68F58; // = 14061400
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-        }
-
-        public void EditDvdbnd1_debug(byte[] unicodeExpression) {
-            fsWriter.Position = 0xD5C2D4; // = 14009044
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD68074; // = 14057588
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD680BC; // = 14057660
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD682C4; // = 14058180
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD68404; // = 14058500
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD68634; // = 14059060
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD6874C; // = 14059340
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD688B8; // = 14059704
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-            fsWriter.Position = 0xD689AC; // = 14059948
-            fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-        }
-        */
         public string MessageDoneModifyingEXE() {
             return "\""+ darkSoulsExe + "\" successfully modified !\n\nThe original file has been backup for safety :\n" + "\"" + darkSoulsBakExe + "\"";
         }
