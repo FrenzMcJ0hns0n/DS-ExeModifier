@@ -4,6 +4,8 @@
 	directory to circumvent any existing d3d9.dll wrappers that
 	may cause incompatibility issues. This wrapper does not
 	modify or add to the functionality of the original d3d9.dll.
+
+	Author: Sean Pesce
 */
 
 #include <Windows.h>
