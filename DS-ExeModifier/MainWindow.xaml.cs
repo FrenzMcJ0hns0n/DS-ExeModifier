@@ -113,25 +113,19 @@ namespace DS_ExeModifier {
             fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
         }
 
-        public string MessageClickOkToExit() {
-            return "\n\nClick OK to exit ...";
-        }
-
         public string MessageDoneModifyingEXE() {
-            return "OK.\n\nThe original \"" + darkSoulsExe + "\" file has been backup for safety :\n" + "\"" + darkSoulsBakExe + "\"";
+            return "\""+ darkSoulsExe + "\" successfully modified !\n\nThe original file has been backup for safety :\n" + "\"" + darkSoulsBakExe + "\"";
         }
 
         public MainWindow() {
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
-
             if (!(File.Exists(darkSoulsExe))) {
                 MessageBox.Show("Error : No EXE found !\n\nMake sure this program is in the same folder as \"" + darkSoulsExe + "\"");
                 Environment.Exit(0);
             }
+        }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
             switch (CheckDarkSoulsExe()) {
                 case "release":
                     textBox_targetExe.Text = targetExeText + "Release";
@@ -165,7 +159,7 @@ namespace DS_ExeModifier {
 
                 if (CheckDarkSoulsExe() == "release") {
 
-                    #region --- Edition of Release EXE -----------------------------------------------------------------
+                    #region --- Release EXE -----------------------------------------------------------------
 
                     try {
                         fsWriter = File.OpenWrite(darkSoulsExe);
@@ -189,7 +183,7 @@ namespace DS_ExeModifier {
                         fsWriter.Close();
                     }
                     catch (Exception ex) {
-                        MessageBox.Show(ex.ToString() + MessageClickOkToExit());
+                        MessageBox.Show(ex.ToString());
                         Environment.Exit(0);
                     }
 
@@ -201,7 +195,7 @@ namespace DS_ExeModifier {
                 } 
                 else if (CheckDarkSoulsExe() == "debug") {
 
-                    #region --- Edition of Debug EXE -----------------------------------------------------------------
+                    #region --- Debug EXE -----------------------------------------------------------------
 
                     try {
                         fsWriter = File.OpenWrite(darkSoulsExe);
@@ -223,7 +217,7 @@ namespace DS_ExeModifier {
                         fsWriter.Close();
                     }
                     catch (Exception ex) {
-                        MessageBox.Show(ex.ToString() + MessageClickOkToExit());
+                        MessageBox.Show(ex.ToString());
                         Environment.Exit(0);
                     }
 
