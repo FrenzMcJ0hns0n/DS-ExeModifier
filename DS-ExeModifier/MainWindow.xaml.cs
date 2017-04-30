@@ -6,6 +6,11 @@ using System.Windows.Media;
 
 namespace DS_ExeModifier {
 
+	static class K32_LoadLib{
+            [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+            public static extern IntPtr LoadLibrary(string dllToLoad);
+    }
+
     public partial class MainWindow : Window {
        
         public const string darkSoulsExe = "DARKSOULS.exe";
@@ -122,6 +127,8 @@ namespace DS_ExeModifier {
         }
 
         public MainWindow() {
+			// Load the preloader DLL that loads d3d9.dll from system directory early instead of from local directory when GUI is initialized
+            IntPtr d3d9_preload = K32_LoadLib.LoadLibrary(@"DSExeMod.dll");
             InitializeComponent();
             if (!(File.Exists(darkSoulsExe))) {
                 MessageBox.Show("Error : No EXE found !\n\nMake sure this program is in the same folder as \"" + darkSoulsExe + "\"");
