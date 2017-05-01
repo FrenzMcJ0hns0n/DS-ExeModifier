@@ -128,7 +128,7 @@ namespace DS_ExeModifier {
 
         public MainWindow() {
 			// Load the preloader DLL that loads d3d9.dll from system directory early instead of from local directory when GUI is initialized
-            IntPtr d3d9_preload = K32_LoadLib.LoadLibrary(@"DSExeMod.dll");
+            IntPtr d3d9_preload = K32_LoadLib.LoadLibrary(@"d3d9_preloader.dll");
             InitializeComponent();
             if (!(File.Exists(darkSoulsExe))) {
                 MessageBox.Show("Error : No EXE found !\n\nMake sure this program is in the same folder as \"" + darkSoulsExe + "\"");
