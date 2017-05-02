@@ -6,15 +6,14 @@
         xmlns:local="clr-namespace:DS_ExeModifier"
         mc:Ignorable="d"
         Title="DS-ExeModifier" Loaded="Window_Loaded"
-        Height="312" Width="400"
-        ResizeMode="CanMinimize"
+        Height="312" Width="400" ResizeMode="CanMinimize"
         >
     <Grid>
         <TextBox 
             x:Name="textBox_targetExe" TextWrapping="Wrap" Text="Text" IsReadOnly="True"
             HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0"
-            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            Height="23" Width="160" Margin="0,16,0,0"
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,16,0,0"
+            Height="23" Width="160"
             />
         <Label 
             Content="Where to load the game data ?" FontWeight="DemiBold"
@@ -22,25 +21,30 @@
             />
 
         <!-- dvdbnd0 -->
+        <Border 
+            BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,90,0,0"
+            Height="50" Width="280"
+            />
         <Label 
             Content="dvdbnd0" FontWeight="DemiBold"
             HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,101,0,0"
             />
         <RadioButton 
             x:Name="radioButton_dvdbnd0fromArchive" GroupName="dvdbnd0" Content="From the archive (default)" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,97,0,0"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,98,0,0"
             />
         <RadioButton 
             x:Name="radioButton_dvdbnd0fromFolders" GroupName="dvdbnd0" Content="From extracted folders" 
             HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,116,0,0"
             />
-        <Border 
-            BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-            HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0,90,0,0"
-            Height="50" Width="280"
-            />
 
         <!-- dvdbnd1 -->
+        <Border 
+            BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,145,0,0"
+            Height="50" Width="280"
+            />
         <Label 
             Content="dvdbnd1" FontWeight="DemiBold"
             HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,157,0,0"
@@ -51,19 +55,14 @@
             />
         <RadioButton 
             x:Name="radioButton_dvdbnd1fromFolders" GroupName="dvdbnd1" Content="From extracted folders" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,172,0,0"
-            />
-        <Border 
-            BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,145,0,0"
-            Height="50" Width="280"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,171,0,0"
             />
 
         <Button 
-            x:Name="button_Apply" Content="Modify EXE"
+            x:Name="button_Apply" Content="Modify EXE" Click="button_Apply_Click"
             FontSize="14" VerticalContentAlignment="Center"
             HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20"
-            Height="28"  Width="110" Click="button_Apply_Click"
+            Height="28"  Width="110"
             />
     </Grid>
 </Window>

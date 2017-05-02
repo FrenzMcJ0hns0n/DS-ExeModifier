@@ -7,12 +7,11 @@ using System.Windows.Media;
 namespace DS_ExeModifier {
 
 	static class K32_LoadLib{
-            [System.Runtime.InteropServices.DllImport("kernel32.dll")]
-            public static extern IntPtr LoadLibrary(string dllToLoad);
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        public static extern IntPtr LoadLibrary(string dllToLoad);
     }
 
     public partial class MainWindow : Window {
-       
         public const string darkSoulsExe = "DARKSOULS.exe";
         public const string darkSoulsBakExe = "DARKSOULS.exe.bak";
         public string exeType;
@@ -40,8 +39,7 @@ namespace DS_ExeModifier {
         public void EditExe(int dvdbnd, byte[] unicodeExpression) {
             switch (exeType) {
 
-                // RELEASE
-                case "T6":
+                case "T6": // RELEASE
                     if (dvdbnd == 0) {
                         fsWriter.Position = 0xD65EA4; // = 14048932
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
@@ -80,8 +78,7 @@ namespace DS_ExeModifier {
                     }
                     break;
 
-                // DEBUG
-                case "´4":
+                case "´4": // DEBUG
                     if (dvdbnd == 0) {
                         fsWriter.Position = 0xD6816C; // = 14057836
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
@@ -122,16 +119,13 @@ namespace DS_ExeModifier {
             }
         }
 
-        public string MessageDoneModifyingEXE() {
-            return "\""+ darkSoulsExe + "\" successfully modified !\n\nThe original file has been backup for safety :\n" + "\"" + darkSoulsBakExe + "\"";
-        }
-
         public MainWindow() {
 			// Preload d3d9.dll directly from the system directory to avoid any modified d3d9.dll files in the local directory (such as PvP Watchdog)
-            IntPtr d3d9_preload = K32_LoadLib.LoadLibrary(Environment.SystemDirectory + "\\d3d9.dll");
+            IntPtr d3d9_preload = K32_LoadLib.LoadLibrary(Environment.SystemDirectory + @"\d3d9.dll");
             InitializeComponent();
+
             if (!(File.Exists(darkSoulsExe))) {
-                MessageBox.Show("Error : No EXE found !\n\nMake sure this program is in the same folder as \"" + darkSoulsExe + "\"");
+                MessageBox.Show("Error : No EXE found !\n\nMake sure this program is in the same folder as \"" + darkSoulsExe + "\".");
                 Environment.Exit(0);
             }
         }
@@ -146,7 +140,7 @@ namespace DS_ExeModifier {
                     textBox_targetExe.Text = "Target EXE type : Debug";
                     textBox_targetExe.Foreground = new SolidColorBrush(Colors.Orange);
                     break;
-                default:
+                case "error":
                     textBox_targetExe.Text = "Target EXE type : Error";
                     textBox_targetExe.Foreground = new SolidColorBrush(Colors.Red);
                     button_Apply.IsEnabled = false;
@@ -154,26 +148,25 @@ namespace DS_ExeModifier {
                     radioButton_dvdbnd0fromFolders.IsEnabled = false;
                     radioButton_dvdbnd1fromArchive.IsEnabled = false;
                     radioButton_dvdbnd1fromFolders.IsEnabled = false;
-                    MessageBox.Show("Error : Wrong EXE file.\n\nIt must be the fully patched Steam version of Dark Souls (release) or the debug version.");
+                    MessageBox.Show("Error : Wrong EXE file.\n\nIt must be the fully patched Steam version of Dark Souls (release) or the debug build.");
                     break;
             }
         }
 
         private void button_Apply_Click(object sender, RoutedEventArgs e) {
-
             byte[] byt;
 
-            if (radioButton_dvdbnd0fromArchive.IsChecked == true 
-             || radioButton_dvdbnd0fromFolders.IsChecked == true 
-             || radioButton_dvdbnd1fromArchive.IsChecked == true 
-             || radioButton_dvdbnd1fromFolders.IsChecked == true) {
-
+            if (radioButton_dvdbnd0fromArchive.IsChecked == false && radioButton_dvdbnd0fromFolders.IsChecked == false && radioButton_dvdbnd1fromArchive.IsChecked == false && radioButton_dvdbnd1fromFolders.IsChecked == false) {
+                MessageBox.Show("Please select at least one option.");
+            } 
+            else {
                 if (File.Exists(darkSoulsBakExe)) { File.Delete(darkSoulsBakExe); }
                 File.Copy(darkSoulsExe, darkSoulsBakExe);
 
                 try {
-                    fsWriter = File.OpenWrite(darkSoulsExe);
-                        
+
+                    fsWriter = File.OpenWrite(darkSoulsExe); 
+
                     if (radioButton_dvdbnd0fromArchive.IsChecked == true) {
                         byt = Encoding.Unicode.GetBytes("dvdbnd0:");
                         EditExe(0, byt);
@@ -182,7 +175,7 @@ namespace DS_ExeModifier {
                         byt = Encoding.Unicode.GetBytes("dvdroot:");
                         EditExe(0, byt);
                     }
-                        
+
                     if (radioButton_dvdbnd1fromArchive.IsChecked == true) {
                         byt = Encoding.Unicode.GetBytes("dvdbnd1:");
                         EditExe(1, byt);
@@ -191,20 +184,18 @@ namespace DS_ExeModifier {
                         byt = Encoding.Unicode.GetBytes("dvdroot:");
                         EditExe(1, byt);
                     }
-
+                    
                     fsWriter.Close();
-                }
 
+                }
                 catch (Exception ex) {
                     MessageBox.Show(ex.ToString());
                     Environment.Exit(0);
                 }
 
-                MessageBox.Show(MessageDoneModifyingEXE());
+                MessageBox.Show("\"" + darkSoulsExe + "\" successfully modified !\n\nA backup of the original file has been created for safety :\n" + "\"" + darkSoulsBakExe + "\".");
                 Environment.Exit(0);
-
-            } 
-            else { MessageBox.Show("Please select at least one option."); }
+            }
         }
 
     }
