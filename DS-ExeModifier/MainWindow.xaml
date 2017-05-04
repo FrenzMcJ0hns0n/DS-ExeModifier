@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:DS_ExeModifier"
         mc:Ignorable="d"
         Title="DS-ExeModifier" Loaded="Window_Loaded"
-        Height="312" Width="400" ResizeMode="CanMinimize"
-        >
+        Height="420" Width="400" ResizeMode="CanMinimize">
+    
     <Grid>
         <TextBox 
             x:Name="textBox_targetExe" TextWrapping="Wrap" Text="Text" IsReadOnly="True"
@@ -57,6 +57,44 @@
             x:Name="radioButton_dvdbnd1fromFolders" GroupName="dvdbnd1" Content="From extracted folders" 
             HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,171,0,0"
             />
+        
+        <!-- dvdbnd2 -->
+        <Border 
+            BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,200,0,0"
+            Height="50" Width="280"
+            />
+        <Label 
+            Content="dvdbnd2" FontWeight="DemiBold"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,211,0,0"
+            />
+        <RadioButton 
+            x:Name="radioButton_dvdbnd2fromArchive" GroupName="dvdbnd2" Content="From the archive (default)" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,208,0,0"
+            />
+        <RadioButton 
+            x:Name="radioButton_dvdbnd2fromFolders" GroupName="dvdbnd2" Content="From extracted folders" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,226,0,0"
+            />
+
+        <!-- dvdbnd3 -->
+        <Border 
+            BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,255,0,0"
+            Height="50" Width="280"
+            />
+        <Label 
+            Content="dvdbnd3" FontWeight="DemiBold"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,266,0,0"
+            />
+        <RadioButton 
+            x:Name="radioButton_dvdbnd3fromArchive" GroupName="dvdbnd3" Content="From the archive (default)" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,263,0,0"
+            />
+        <RadioButton 
+            x:Name="radioButton_dvdbnd3fromFolders" GroupName="dvdbnd3" Content="From extracted folders" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,281,0,0"
+            />
 
         <Button 
             x:Name="button_Apply" Content="Modify EXE" Click="button_Apply_Click"
@@ -64,5 +102,7 @@
             HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20"
             Height="28"  Width="110"
             />
+        
+
     </Grid>
 </Window>

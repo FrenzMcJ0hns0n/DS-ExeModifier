@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace DS_ExeModifier {
 
-	static class K32_LoadLib{
+	static class K32_LoadLib {
         [System.Runtime.InteropServices.DllImport("kernel32.dll")]
         public static extern IntPtr LoadLibrary(string dllToLoad);
     }
@@ -76,6 +76,22 @@ namespace DS_ExeModifier {
                         fsWriter.Position = 0xD666E4; // = 14051044
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                     }
+                    else if (dvdbnd == 2) {
+                        fsWriter.Position = 0xD66734; // = 14051124
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                        fsWriter.Position = 0xD667C4; // = 14051268
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                        fsWriter.Position = 0xD66EAC; // = 14053036
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                    }
+                    else if (dvdbnd == 3) {
+                        fsWriter.Position = 0xD65E34; // = 14048820
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                        fsWriter.Position = 0xD663B0; // = 14050224
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                        fsWriter.Position = 0xD66434; // = 14050356
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                    }
                     break;
 
                 case "´4": // DEBUG
@@ -115,6 +131,22 @@ namespace DS_ExeModifier {
                         fsWriter.Position = 0xD689AC; // = 14059948
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                     }
+                    else if (dvdbnd == 2) {
+                        fsWriter.Position = 0xD689FC; // = 14060028
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                        fsWriter.Position = 0xD68A8C; // = 14060172
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                        fsWriter.Position = 0xD69174; // = 14061940
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                    }
+                    else if (dvdbnd == 3) {
+                        fsWriter.Position = 0xD680FC; // = 14057724
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                        fsWriter.Position = 0xD68678; // = 14059128
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                        fsWriter.Position = 0xD686FC; // = 14059260
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                    }
                     break;
             }
         }
@@ -144,10 +176,10 @@ namespace DS_ExeModifier {
                     textBox_targetExe.Text = "Target EXE type : Error";
                     textBox_targetExe.Foreground = new SolidColorBrush(Colors.Red);
                     button_Apply.IsEnabled = false;
-                    radioButton_dvdbnd0fromArchive.IsEnabled = false;
-                    radioButton_dvdbnd0fromFolders.IsEnabled = false;
-                    radioButton_dvdbnd1fromArchive.IsEnabled = false;
-                    radioButton_dvdbnd1fromFolders.IsEnabled = false;
+                    radioButton_dvdbnd0fromArchive.IsEnabled = false; radioButton_dvdbnd0fromFolders.IsEnabled = false;
+                    radioButton_dvdbnd1fromArchive.IsEnabled = false; radioButton_dvdbnd1fromFolders.IsEnabled = false;
+                    radioButton_dvdbnd2fromArchive.IsEnabled = false; radioButton_dvdbnd2fromFolders.IsEnabled = false;
+                    radioButton_dvdbnd3fromArchive.IsEnabled = false; radioButton_dvdbnd3fromFolders.IsEnabled = false;
                     MessageBox.Show("Error : Wrong EXE file.\n\nIt must be the fully patched Steam version of Dark Souls (release) or the debug build.");
                     break;
             }
@@ -156,11 +188,16 @@ namespace DS_ExeModifier {
         private void button_Apply_Click(object sender, RoutedEventArgs e) {
             byte[] byt;
 
-            if (radioButton_dvdbnd0fromArchive.IsChecked == false && radioButton_dvdbnd0fromFolders.IsChecked == false && radioButton_dvdbnd1fromArchive.IsChecked == false && radioButton_dvdbnd1fromFolders.IsChecked == false) {
+            if (radioButton_dvdbnd0fromArchive.IsChecked == false && radioButton_dvdbnd0fromFolders.IsChecked == false && 
+                radioButton_dvdbnd1fromArchive.IsChecked == false && radioButton_dvdbnd1fromFolders.IsChecked == false &&
+                radioButton_dvdbnd2fromArchive.IsChecked == false && radioButton_dvdbnd2fromFolders.IsChecked == false &&
+                radioButton_dvdbnd3fromArchive.IsChecked == false && radioButton_dvdbnd3fromFolders.IsChecked == false) {
                 MessageBox.Show("Please select at least one option.");
             } 
             else {
-                if (File.Exists(darkSoulsBakExe)) { File.Delete(darkSoulsBakExe); }
+                if (File.Exists(darkSoulsBakExe)) {
+                    File.Delete(darkSoulsBakExe);
+                }
                 File.Copy(darkSoulsExe, darkSoulsBakExe);
 
                 try {
@@ -184,7 +221,25 @@ namespace DS_ExeModifier {
                         byt = Encoding.Unicode.GetBytes("dvdroot:");
                         EditExe(1, byt);
                     }
-                    
+
+                    if (radioButton_dvdbnd2fromArchive.IsChecked == true) {
+                        byt = Encoding.Unicode.GetBytes("dvdbnd2:");
+                        EditExe(2, byt);
+                    }
+                    else if (radioButton_dvdbnd2fromFolders.IsChecked == true) {
+                        byt = Encoding.Unicode.GetBytes("dvdroot:");
+                        EditExe(2, byt);
+                    }
+
+                    if (radioButton_dvdbnd3fromArchive.IsChecked == true) {
+                        byt = Encoding.Unicode.GetBytes("dvdbnd3:");
+                        EditExe(3, byt);
+                    }
+                    else if (radioButton_dvdbnd3fromFolders.IsChecked == true) {
+                        byt = Encoding.Unicode.GetBytes("dvdroot:");
+                        EditExe(3, byt);
+                    }
+
                     fsWriter.Close();
 
                 }
