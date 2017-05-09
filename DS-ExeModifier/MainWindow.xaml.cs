@@ -154,6 +154,7 @@ namespace DS_ExeModifier {
         public MainWindow() {
 			// Preload d3d9.dll directly from the system directory to avoid any modified d3d9.dll files in the local directory (such as PvP Watchdog)
             IntPtr d3d9_preload = K32_LoadLib.LoadLibrary(Environment.SystemDirectory + @"\d3d9.dll");
+            IntPtr dxgi_preload = K32_LoadLib.LoadLibrary(Environment.SystemDirectory + @"\dxgi.dll");
             InitializeComponent();
 
             if (!(File.Exists(darkSoulsExe))) {
