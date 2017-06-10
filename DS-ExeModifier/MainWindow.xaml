@@ -6,95 +6,180 @@
         xmlns:local="clr-namespace:DS_ExeModifier"
         mc:Ignorable="d"
         Title="DS-ExeModifier" Loaded="Window_Loaded"
-        Height="420" Width="400" ResizeMode="CanMinimize">
-    
+        Height="480" Width="420" ResizeMode="CanMinimize">
+
     <Grid>
         <TextBox 
-            x:Name="textBox_targetExe" TextWrapping="Wrap" Text="Text" IsReadOnly="True"
+            x:Name="textBox_targetExe" TextWrapping="Wrap" Text="Version" IsReadOnly="True"
             HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0"
             HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,16,0,0"
             Height="23" Width="160"
             />
+        <GroupBox 
+            Header="Where to load the game data from ?" FontSize="19" FontWeight="DemiBold"
+            HorizontalAlignment="Center" VerticalAlignment="Top" 
+            Height="342" Width="340" Margin="0,68,0,0"
+            />
+
         <Label 
-            Content="Where to load the game data ?" FontWeight="DemiBold"
-            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,61,0,0"
+            Content="" FontSize="14" FontWeight="DemiBold"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,70,0,0"
+            />
+
+        <Label 
+            Content="Data" HorizontalContentAlignment="Center" FontWeight="DemiBold"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="49,135,0,0" 
+            Width="96"
+            />
+        <Label 
+            Content=".bdt archive" HorizontalContentAlignment="Center"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,126,0,0" 
+            Width="96"
+            />
+        <Label 
+            Content="(default)" HorizontalContentAlignment="Center"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,143,0,0" 
+            Width="96"
+            />
+        <Label 
+            Content="Extracted folders" HorizontalContentAlignment="Center"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="247,126,0,0" 
+            Width="103"
+            />
+        <Label 
+            Content="(mod)" HorizontalContentAlignment="Center"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="247,143,0,0" 
+            Width="103"
             />
 
         <!-- dvdbnd0 -->
         <Border 
             BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,90,0,0"
-            Height="50" Width="280"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,172,0,0"
+            Height="46" Width="296"
             />
         <Label 
             Content="dvdbnd0" FontWeight="DemiBold"
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,101,0,0"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,181,0,0"
             />
         <RadioButton 
-            x:Name="radioButton_dvdbnd0fromArchive" GroupName="dvdbnd0" Content="From the archive (default)" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,98,0,0"
-            />
-        <RadioButton 
-            x:Name="radioButton_dvdbnd0fromFolders" GroupName="dvdbnd0" Content="From extracted folders" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,116,0,0"
-            />
+            x:Name="radioButton_dvdbnd0fromArchive" GroupName="dvdbnd0"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="194,188,0,0"
+            >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+        <RadioButton
+            x:Name="radioButton_dvdbnd0fromFolders" GroupName="dvdbnd0"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,188,0,0"
+            >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+
 
         <!-- dvdbnd1 -->
         <Border 
             BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,145,0,0"
-            Height="50" Width="280"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,223,0,0"
+            Height="46" Width="296"
             />
         <Label 
             Content="dvdbnd1" FontWeight="DemiBold"
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,157,0,0"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,233,0,0"
             />
         <RadioButton 
-            x:Name="radioButton_dvdbnd1fromArchive" GroupName="dvdbnd1" Content="From the archive (default)" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,153,0,0"
-            />
+            x:Name="radioButton_dvdbnd1fromArchive" GroupName="dvdbnd1"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="194,240,0,0"
+            >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
         <RadioButton 
-            x:Name="radioButton_dvdbnd1fromFolders" GroupName="dvdbnd1" Content="From extracted folders" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,171,0,0"
-            />
-        
+            x:Name="radioButton_dvdbnd1fromFolders" GroupName="dvdbnd1"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,240,0,0"
+            >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+
         <!-- dvdbnd2 -->
         <Border 
             BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,200,0,0"
-            Height="50" Width="280"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,274,0,0"
+            Height="46" Width="296"
             />
         <Label 
             Content="dvdbnd2" FontWeight="DemiBold"
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,211,0,0"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,283,0,0"
             />
         <RadioButton 
-            x:Name="radioButton_dvdbnd2fromArchive" GroupName="dvdbnd2" Content="From the archive (default)" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,208,0,0"
-            />
+            x:Name="radioButton_dvdbnd2fromArchive" GroupName="dvdbnd2"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="194,290,0,0"
+            >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
         <RadioButton 
-            x:Name="radioButton_dvdbnd2fromFolders" GroupName="dvdbnd2" Content="From extracted folders" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,226,0,0"
-            />
+            x:Name="radioButton_dvdbnd2fromFolders" GroupName="dvdbnd2"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,290,0,0"
+            >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
 
         <!-- dvdbnd3 -->
         <Border 
             BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
-            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,255,0,0"
-            Height="50" Width="280"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,325,0,0"
+            Height="46" Width="296"
             />
         <Label 
             Content="dvdbnd3" FontWeight="DemiBold"
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,266,0,0"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,334,0,0"
             />
         <RadioButton 
-            x:Name="radioButton_dvdbnd3fromArchive" GroupName="dvdbnd3" Content="From the archive (default)" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,263,0,0"
-            />
+            x:Name="radioButton_dvdbnd3fromArchive" GroupName="dvdbnd3"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="194,341,0,0"
+            >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
         <RadioButton 
-            x:Name="radioButton_dvdbnd3fromFolders" GroupName="dvdbnd3" Content="From extracted folders" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="145,281,0,0"
+            x:Name="radioButton_dvdbnd3fromFolders" GroupName="dvdbnd3"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="292,341,0,0"
+            >
+            <RadioButton.RenderTransform>
+                <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+
+        <!-- "Tick all" checkboxes
+        <Border 
+            BorderBrush="LightGray" BorderThickness="1" CornerRadius="4"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Margin="59,370,59,0"
+            Height="28" Width="296"
             />
+        <Label 
+            Content="Tick all" FontWeight="DemiBold" HorizontalContentAlignment="Center"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="70,371,0,0" Width="59"
+            />
+        <CheckBox
+            x:Name="checkBox_allTicked_fromArchive"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,378,0,0"
+            />
+        <CheckBox
+            x:Name="checkBox_allTicked_fromFolders"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Margin="297,378,0,0"
+            />
+         -->
 
         <Button 
             x:Name="button_Apply" Content="Modify EXE" Click="button_Apply_Click"
@@ -102,7 +187,5 @@
             HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20"
             Height="28"  Width="110"
             />
-        
-
     </Grid>
 </Window>
