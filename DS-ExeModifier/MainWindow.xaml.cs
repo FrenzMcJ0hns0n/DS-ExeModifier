@@ -254,5 +254,18 @@ namespace DS_ExeModifier {
             }
         }
 
+        private void button_loadAllFromArchive_Click(object sender, RoutedEventArgs e) {
+            radioButton_dvdbnd0fromArchive.IsChecked = true;
+            radioButton_dvdbnd1fromArchive.IsChecked = true;
+            radioButton_dvdbnd2fromArchive.IsChecked = true;
+            radioButton_dvdbnd3fromArchive.IsChecked = true;
+        }
+
+        private void button_loadAllFromExtractedFolders_Click(object sender, RoutedEventArgs e) {
+            radioButton_dvdbnd0fromFolders.IsChecked = true;
+            radioButton_dvdbnd1fromFolders.IsChecked = true;
+            radioButton_dvdbnd2fromFolders.IsChecked = true;
+            radioButton_dvdbnd3fromFolders.IsChecked = true;
+        }
     }
 }
