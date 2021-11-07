@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -18,12 +19,12 @@ namespace DS_ExeModifier {
         public string exeType;
         FileStream fsWriter;
 
-        public string CheckDarkSoulsExe() {
+        public string ReturnExeType() {
             byte[] bytes;
 
-            using (BinaryReader b = new BinaryReader(File.OpenRead(darkSoulsExe))) {
-                b.BaseStream.Position = 0x80; // 128
-                bytes = b.ReadBytes(2);
+            using (BinaryReader br = new BinaryReader(File.OpenRead(darkSoulsExe))) {
+                br.BaseStream.Position = 0x80; // 128
+                bytes = br.ReadBytes(2);
                 exeType = Encoding.Default.GetString(bytes);
             }
 
@@ -38,118 +39,88 @@ namespace DS_ExeModifier {
         }
 
         public void EditExe(int dvdbnd, byte[] unicodeExpression) {
-            switch (exeType) {
 
-                case "T6": // RELEASE
-                    if (dvdbnd == 0) {
-                        fsWriter.Position = 0xD65EA4; // = 14048932
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD660F8; // = 14049528
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD66180; // = 14049664
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD6627C; // = 14049916
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD662C8; // = 14049992
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD66318; // = 14050072
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD66C90; // = 14052496
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                    }
-                    else if (dvdbnd == 1) {
-                        fsWriter.Position = 0xD57F14; // = 13991700
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD65DAC; // = 14048684
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD65DF4; // = 14048756
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD65FFC; // = 14049276
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD6613C; // = 14049596
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD6636C; // = 14050156
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD66484; // = 14050436
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD665F0; // = 14050800
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD666E4; // = 14051044
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                    }
-                    else if (dvdbnd == 2) {
-                        fsWriter.Position = 0xD66734; // = 14051124
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD667C4; // = 14051268
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD66EAC; // = 14053036
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                    }
-                    else if (dvdbnd == 3) {
-                        fsWriter.Position = 0xD65E34; // = 14048820
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD663B0; // = 14050224
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD66434; // = 14050356
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                    }
-                    break;
+            if (exeType == "T6") // RELEASE VERSION
+            {
+                List<int> bnd0_r = new List<int>() { 0xD65EA4, 0xD660F8, 0xD66180, 0xD6627C, 0xD662C8, 0xD66318, 0xD66C90 };
+                List<int> bnd1_r = new List<int>() { 0xD57F14, 0xD65DAC, 0xD65DF4, 0xD65FFC, 0xD6613C, 0xD6636C, 0xD66484, 0xD665F0, 0xD666E4 };
+                List<int> bnd2_r = new List<int>() { 0xD66734, 0xD667C4, 0xD66EAC };
+                List<int> bnd3_r = new List<int>() { 0xD65E34, 0xD663B0, 0xD66434 };
 
-                case "´4": // DEBUG
-                    if (dvdbnd == 0) {
-                        fsWriter.Position = 0xD6816C; // = 14057836
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD683C0; // = 14058432
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD68448; // = 14058568
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD68544; // = 14058820
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD68590; // = 14058896
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD685E0; // = 14058976
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD68F58; // = 14061400
+                if (dvdbnd == 0)
+                {
+                    foreach (int position in bnd0_r)
+                    {
+                        fsWriter.Position = position;
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                     }
-                    else if (dvdbnd == 1) {
-                        fsWriter.Position = 0xD5C2D4; // = 14009044
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD68074; // = 14057588
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD680BC; // = 14057660
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD682C4; // = 14058180
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD68404; // = 14058500
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD68634; // = 14059060
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD6874C; // = 14059340
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD688B8; // = 14059704
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD689AC; // = 14059948
+                }
+                else if (dvdbnd == 1)
+                {
+                    foreach (int position in bnd1_r)
+                    {
+                        fsWriter.Position = position;
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                     }
-                    else if (dvdbnd == 2) {
-                        fsWriter.Position = 0xD689FC; // = 14060028
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD68A8C; // = 14060172
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD69174; // = 14061940
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                    }
-                    else if (dvdbnd == 3) {
-                        fsWriter.Position = 0xD680FC; // = 14057724
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD68678; // = 14059128
-                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
-                        fsWriter.Position = 0xD686FC; // = 14059260
+                }
+                else if (dvdbnd == 2)
+                {
+                    foreach (int position in bnd2_r)
+                    {
+                        fsWriter.Position = position;
                         fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
                     }
-                    break;
+                }
+                else if (dvdbnd == 3)
+                {
+                    foreach (int position in bnd3_r)
+                    {
+                        fsWriter.Position = position;
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                    }
+                }
             }
+                    
+            else if (exeType == "´4") // DEBUG VERSION
+            {
+                List<int> bnd0_d = new List<int>() { 0xD6816C, 0xD683C0, 0xD68448, 0xD68544, 0xD68590, 0xD685E0, 0xD68F58 };
+                List<int> bnd1_d = new List<int>() { 0xD5C2D4, 0xD68074, 0xD680BC, 0xD682C4, 0xD68404, 0xD68634, 0xD6874C, 0xD688B8, 0xD689AC };
+                List<int> bnd2_d = new List<int>() { 0xD689FC, 0xD68A8C, 0xD69174 };
+                List<int> bnd3_d = new List<int>() { 0xD680FC, 0xD68678, 0xD686FC };
+                if (dvdbnd == 0)
+                {
+                    foreach (int position in bnd0_d)
+                    {
+                        fsWriter.Position = position;
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                    }
+                }
+                else if (dvdbnd == 1)
+                {
+                    foreach (int position in bnd1_d)
+                    {
+                        fsWriter.Position = position;
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                    }
+                }
+                else if (dvdbnd == 2)
+                {
+                    foreach (int position in bnd2_d)
+                    {
+                        fsWriter.Position = position;
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                    }
+                }
+                else if (dvdbnd == 3)
+                {
+                    foreach (int position in bnd3_d)
+                    {
+                        fsWriter.Position = position;
+                        fsWriter.Write(unicodeExpression, 0, unicodeExpression.Length);
+                    }
+                }
+            }    
+            
         }
 
         public MainWindow() {
@@ -165,7 +136,7 @@ namespace DS_ExeModifier {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            switch (CheckDarkSoulsExe()) {
+            switch (ReturnExeType()) {
                 case "release":
                     textBox_targetExe.Text = "Target EXE type : Release";
                     textBox_targetExe.Foreground = new SolidColorBrush(Colors.Green);
