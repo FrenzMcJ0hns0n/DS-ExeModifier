@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
 namespace DS_ExeModifier {
 
-	static class K32_LoadLib {
-        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+    static class K32_LoadLib {
+        [DllImport("kernel32.dll")]
         public static extern IntPtr LoadLibrary(string dllToLoad);
     }
 
@@ -152,7 +153,7 @@ namespace DS_ExeModifier {
         }
 
         public MainWindow() {
-			// Preload d3d9.dll directly from the system directory to avoid any modified d3d9.dll files in the local directory (such as PvP Watchdog)
+            // Preload d3d9.dll directly from the system directory to avoid any modified d3d9.dll files in the local directory (such as PvP Watchdog)
             IntPtr d3d9_preload = K32_LoadLib.LoadLibrary(Environment.SystemDirectory + @"\d3d9.dll");
             IntPtr dxgi_preload = K32_LoadLib.LoadLibrary(Environment.SystemDirectory + @"\dxgi.dll");
             InitializeComponent();
